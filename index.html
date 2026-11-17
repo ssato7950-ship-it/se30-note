@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SE30年の実務ノート｜設計書テンプレートと実務ノート</title>
+<meta name="description" content="保険・通信の基幹システムで要件定義から移行まで担当してきたSEが、現場で使ってきた設計書のExcelテンプレートと実務ノートをまとめたページです。">
+<meta property="og:title" content="SE30年の実務ノート｜設計書テンプレートと実務ノート">
+<meta property="og:description" content="要件定義書・基本設計書・テスト仕様書・移行計画書・WBSのExcelテンプレート（各1,500円）と、noteの実務ノート。">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap">
+<style>
+:root{--bg:#0F1B33;--band:#142344;--card:#17264A;--line:#2B3D68;--rule:#263760;--text:#E8ECF4;--sub:#C3CBDB;--mute:#AEB8CC;--gold:#C9A24B}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-serif;line-height:1.8;font-size:16px}
+a{color:#E3C478}a:hover{color:#F2DDA4}
+p,h1,h2,h3,ul{margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding:88px 24px;display:flex;flex-direction:column;gap:32px}
+.band{background:var(--band);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.serif{font-family:'Noto Serif JP',serif}
+h2{font-family:'Noto Serif JP',serif;font-size:30px;line-height:1.5}
+.eyebrow{color:var(--gold);font-size:14px;font-weight:700;letter-spacing:.12em}
+.sub{color:var(--sub)}.mute{color:var(--mute);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.band .card{background:var(--bg)}
+.card h3{font-size:19px;line-height:1.55}
+.card .sub{font-size:15px;flex-grow:1}
+.price{font-size:22px;font-weight:700;color:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 28px;border-radius:6px;font-weight:700;text-decoration:none;background:var(--gold);color:var(--bg)}
+.btn:hover{color:var(--bg);background:#D8B45E}
+.btn.line{background:none;border:1px solid var(--gold);color:var(--text)}
+.btn.line:hover{color:var(--text);background:rgba(201,162,75,.12)}
+.btns{display:flex;flex-wrap:wrap;gap:16px}
+header,footer{border-bottom:1px solid var(--rule)}footer{border:0;border-top:1px solid var(--rule)}
+.bar{max-width:1080px;margin:0 auto;padding:16px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+nav{display:flex;flex-wrap:wrap;gap:20px;font-size:14px}nav a{text-decoration:none}
+.hero{padding-top:96px;gap:28px}
+.hero h1{font-family:'Noto Serif JP',serif;font-size:clamp(32px,5vw,56px);line-height:1.35}
+.hero .sub{max-width:640px;font-size:18px}
+.num{color:var(--gold);font-weight:700;font-size:14px}
+.qa{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:20px 24px}
+.qa p:first-child{font-weight:700;margin-bottom:6px}.qa .sub{font-size:15px}
+.end{align-items:center;text-align:center}
+</style>
+</head>
+<body>
+
+<header><div class="bar">
+<div class="serif" style="font-weight:700;font-size:18px">SE30年の実務ノート</div>
+<nav aria-label="ページ内リンク"><a href="#templates">テンプレート</a><a href="#note">note記事</a><a href="#profile">プロフィール</a></nav>
+</div></header>
+
+<section class="wrap hero">
+<p class="eyebrow">保険・通信の基幹システムの現場から</p>
+<h1>仕様書がない現場で、<br>30年使ってきた「型」。</h1>
+<p class="sub">要件定義から移行まで担当してきたSEが、実際に使ってきた設計書のExcelテンプレートと、実務のノートをまとめました。白紙から作る時間を、確認する時間に変えるための道具です。</p>
+<div class="btns"><a class="btn" href="https://se30-note.booth.pm/">BOOTHでテンプレートを見る</a><a class="btn line" href="https://note.com/unique_sedum231/m/m4277ddf971fa">noteで読む（無料記事あり）</a></div>
+</section>
+
+<section class="band"><div class="wrap">
+<h2>こんな人に向けて作りました</h2>
+<div class="grid">
+<div class="card"><p class="num">01</p><h3>設計書を毎回白紙から作っている</h3><p class="sub">項目の並びから考えるので、書き始めるまでに時間がかかる。</p></div>
+<div class="card"><p class="num">02</p><h3>移行やテストの抜け漏れが怖い</h3><p class="sub">何を確認すればよいか、決まった型がない。</p></div>
+<div class="card"><p class="num">03</p><h3>進捗表をプロジェクトごとに作り直している</h3><p class="sub">WBSとガントチャートの手直しに毎回追われる。</p></div>
+</div>
+</div></section>
+
+<section class="wrap" id="templates">
+<div><p class="eyebrow">EXCEL TEMPLATES</p><h2>設計書テンプレート（BOOTH）</h2><p class="sub">どれも記入例つき・マクロなしのExcelです。BOOTHで購入すると、購入履歴からすぐにダウンロードできます。</p></div>
+<div class="grid">
+<article class="card"><p class="mute">上流</p><h3>要件定義書テンプレート（Excel）</h3><p class="sub">記入例つき。非機能要件24項目を最初から記入済みで、提出前のレビューチェックリスト25項目つき。全14シート。</p><p class="price">1,500円</p><a class="btn" href="https://se30-note.booth.pm/items/9124134">BOOTHで見る</a></article>
+<article class="card"><p class="mute">設計</p><h3>基本設計書テンプレート（Excel）</h3><p class="sub">バッチの時間チェック、CRUD表、容量見積り、レビュー40項目までそろえた基本設計書です。</p><p class="price">1,500円</p><a class="btn" href="https://se30-note.booth.pm/items/9145133">BOOTHで見る</a></article>
+<article class="card"><p class="mute">テスト</p><h3>テスト仕様書・テスト結果報告書テンプレート（Excel）</h3><p class="sub">障害管理表、消化曲線のグラフ、テスト完了の判定チェックリストつき。</p><p class="price">1,500円</p><a class="btn" href="https://se30-note.booth.pm/items/9125038">BOOTHで見る</a></article>
+<article class="card"><p class="mute">移行</p><h3>移行計画書テンプレート（Excel）</h3><p class="sub">移行してよいかを決めるGo/No-Goチェックリストと、切替当日のタイムチャートつき。</p><p class="price">1,500円</p><a class="btn" href="https://se30-note.booth.pm/items/9124269">BOOTHで見る</a></article>
+<article class="card"><p class="mute">管理</p><h3>WBS・進捗管理表テンプレート（Excel）</h3><p class="sub">ガントチャートが自動で伸び、遅れも自動で見つけます。進捗曲線と週次報告つき。</p><p class="price">1,500円</p><a class="btn" href="https://se30-note.booth.pm/items/9128356">BOOTHで見る</a></article>
+</div>
+</section>
+
+<section class="band" id="note"><div class="wrap">
+<div><p class="eyebrow">NOTE</p><h2>実務ノート（note）</h2><p class="sub">AIツールを仕事で使う前の確認、依頼文のテンプレ、現場の記録を書いています。まずは無料の記事からどうぞ。</p></div>
+<div class="grid">
+<article class="card"><p class="mute">有料記事</p><h3>有料noteを2本出して売上0円だった3週間の全記録｜原因の切り分け表と改善チェックリスト</h3><p class="sub">売れなかった理由を切り分ける表と、タイトル・無料部分・告知を直すためのチェックリストです。</p><p class="price">500円</p><a class="btn line" href="https://note.com/unique_sedum231/n/n46bcb0dfcdfd">noteで読む</a></article>
+<article class="card"><p class="mute">マガジン</p><h3>マガジン「SE30年の実務ノート」</h3><ul class="sub" style="padding-left:20px"><li>AIのAPIキー流出を防ぐ点検リスト30</li><li>AI議事録の運用ルールテンプレ</li><li>SKILL.mdの書き方｜手順書をAgent Skillsに変えるテンプレ</li><li>ほか、無料・有料の記事をまとめています</li></ul><a class="btn" href="https://note.com/unique_sedum231/m/m4277ddf971fa">マガジンを見る</a></article>
+</div>
+</div></section>
+
+<section class="wrap" id="profile" style="gap:20px">
+<p class="eyebrow">PROFILE</p>
+<h2>オジ散歩（SE30年の実務ノート）</h2>
+<p class="sub" style="max-width:720px">社会人30年目のシステムエンジニア。信販系クレジットカード会社や、保険・通信の基幹システムで、要件定義から移行までを担当してきました。仕様書がなく、作った人もいない現場で使ってきた手順とテンプレートを、そのまま使える形にして公開しています。散歩の記録も書いています。</p>
+</section>
+
+<section class="band"><div class="wrap" style="gap:16px">
+<h2>よくある質問</h2>
+<div class="qa"><p>Q. どこで買えますか？</p><p class="sub">テンプレートはBOOTH、記事はnoteで購入できます。このページでお金を払うことはありません。</p></div>
+<div class="qa"><p>Q. 中身を見てから決めたいです。</p><p class="sub">各商品ページに、入っているシートと特徴の説明があります。noteは無料部分だけでも読めます。</p></div>
+<div class="qa"><p>Q. どのソフトで使えますか？</p><p class="sub">Microsoft Excel（Windows / Mac）で使えます。Googleスプレッドシートでも開けますが、一部の書式が変わることがあります。</p></div>
+<div class="qa"><p>Q. 会社の仕事で使ってもよいですか？</p><p class="sub">はい。購入したご本人の業務（社内・お客様先の案件を含む）で、自由に編集して使えます。ファイルそのものの再配布・転売はご遠慮ください。</p></div>
+</div></section>
+
+<section class="wrap end">
+<h2 style="font-size:clamp(26px,3.5vw,36px)">白紙から作る時間を、<br>確認する時間に。</h2>
+<div class="btns" style="justify-content:center"><a class="btn" href="https://se30-note.booth.pm/">BOOTHでテンプレートを見る</a><a class="btn line" href="https://note.com/unique_sedum231/m/m4277ddf971fa">noteで読む</a></div>
+</section>
+
+<footer><div class="bar mute"><span>© 2026 SE30年の実務ノート｜オジ散歩</span><span>販売：BOOTH ／ note</span></div></footer>
+
+</body>
+</html>

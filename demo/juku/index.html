@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- ============================================================
+  ✏️ 書きかえる場所は、まずこの「教室の情報」だけです。
+  電話番号・申し込みページ・LINE・住所・受付時間は、ここを直すと
+  ページの中の全部の場所（ボタン・地図・下の固定バー・Google向けの情報）に反映されます。
+  使わない項目は "" （空）にすると、そのボタンが自動で消えます。
+============================================================ -->
+<script>
+window.SHOP = {
+  name: "個別指導塾 あおば",                   // 教室名
+  nameKana: "こべつしどうじゅく あおば",
+  catch: "小学生・中学生・高校生の個別指導塾",      // 一言紹介（Google・SNSで表示）
+  tel: "03-0000-0000",                       // 電話番号（"" で電話ボタンを消す）
+  reserve: "https://example.com/trial",      // 体験授業の申し込みページ（Googleフォーム等。"" で消す）
+  line: "https://line.me/R/ti/p/@example",   // LINE公式アカウントのURL（"" で消す）
+  zip: "000-0000",
+  address: "東京都〇〇区〇〇町7-8-9 あおばビル3F",
+  access: "〇〇駅 東口から徒歩2分／〇〇中学校から徒歩8分",
+  hours: [
+    ["月〜金", "14:00 – 22:00"],
+    ["土", "10:00 – 18:00"],
+    ["休み", "日曜・祝日（テスト前は日曜も開けます）"]
+  ],
+  parking: "なし（自転車は塾の前に置けます）",
+  payment: "口座振替（毎月27日）"
+};
+</script>
+<title>個別指導塾 あおば｜〇〇駅の個別指導塾</title>
+<meta name="description" content="〇〇駅 東口から徒歩2分の個別指導塾。小学生から高校生まで、講師1人に生徒2人まで。無料の体験授業を受け付けています。">
+<meta property="og:title" content="個別指導塾 あおば｜〇〇駅の個別指導塾">
+<meta property="og:description" content="講師1人に生徒2人までの個別指導。無料の体験授業を受け付けています。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap">
+<style>
+/* ============================================================
+  ✏️ 色を変えるときは、ここの色だけを変えます。
+  layout: ノートの方眼のファーストビュー＋「学年を選ぶ」で時間割と月謝が切りかわる。
+  文字は読みやすさを考えて作られたユニバーサルデザインの書体（BIZ UDPゴシック）です。
+============================================================ */
+:root{
+  --bg:#F7F9FC;      /* 背景 */
+  --ink:#18223B;     /* 文字 */
+  --navy:#1E3A6E;    /* メインの色（見出し・選んだタブ） */
+  --sky:#E5EDF8;     /* 帯の背景 */
+  --act:#B93E0E;     /* 申し込みボタン */
+  --line:#CBD6E6;    /* 線 */
+  --soft:#4B5874;    /* うすい文字 */
+  --font:"BIZ UDPGothic","Hiragino Sans","Yu Gothic",sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+.nb{display:inline-block}
+@media (max-width:760px){.bar>.btn,.bar-right>.btn{display:none}.logo{white-space:nowrap}}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.85;-webkit-text-size-adjust:100%}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--navy)}
+:focus-visible{outline:3px solid var(--act);outline-offset:3px;border-radius:4px}
+h1,h2,h3,p,ul,ol,dl,dd{margin:0}
+h1,h2,h3{font-weight:700;text-wrap:balance}
+h2{font-size:clamp(24px,3.2vw,30px);line-height:1.45}
+.skip{position:absolute;left:-9999px}.skip:focus{left:16px;top:12px;z-index:100;background:#fff;padding:8px 12px}
+.in{max-width:1080px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+section{padding-block:clamp(60px,9vw,100px)}
+.head{display:grid;gap:12px;margin-bottom:clamp(28px,4vw,40px)}
+.lead{color:var(--soft);max-width:38em}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 28px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--act);color:#fff;border:2px solid var(--act);box-shadow:0 3px 0 #7E2A09}
+.btn:hover{background:#A3360C}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 #7E2A09}
+.btn.ghost{background:#fff;color:var(--navy);border-color:var(--navy);box-shadow:0 3px 0 var(--line)}
+.btn.ghost:hover{background:var(--sky)}
+
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.logo{font-weight:700;font-size:19px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo svg{width:30px;height:30px}
+nav ul{display:flex;gap:22px;list-style:none;padding:0;font-size:14px}
+nav a{color:var(--ink);text-decoration:none}nav a:hover{color:var(--navy);text-decoration:underline}
+.bar .btn{min-height:44px;padding:0 18px;font-size:14px;box-shadow:none}
+@media (max-width:860px){nav{display:none}}
+
+/* ファーストビュー（ノートの方眼） */
+.hero{background-color:#fff;background-image:linear-gradient(var(--sky) 1px,transparent 1px),linear-gradient(90deg,var(--sky) 1px,transparent 1px);background-size:24px 24px;border-bottom:1px solid var(--line);padding-block:clamp(48px,8vw,96px)}
+.hero .in{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(28px,5vw,56px);align-items:center}
+.hero h1{font-size:clamp(30px,4.6vw,48px);line-height:1.4;color:var(--navy)}
+.hero-text{display:grid;gap:22px}
+.hero-text p{font-size:17px}
+.btns{display:flex;flex-wrap:wrap;gap:14px}
+.hero-card{background:#fff;border:2px solid var(--navy);border-radius:16px;padding:24px;display:grid;gap:14px}
+.hero-card h2{font-size:18px}
+.points{list-style:none;padding:0;display:grid;gap:12px}
+.points li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:baseline}
+.points b{font-size:28px;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.2;min-width:3.2em}
+.points span{font-size:15px}
+@media (max-width:820px){.hero .in{grid-template-columns:1fr}}
+
+/* 学年を選ぶ */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tabs button{font:inherit;font-weight:700;font-size:16px;min-height:52px;padding:0 24px;border-radius:10px;border:2px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:clamp(20px,3vw,32px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(24px,4vw,44px)}
+.panel h3{font-size:22px;color:var(--navy)}
+.panel-about{display:grid;gap:14px;align-content:start}
+.fee{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 16px;border-top:1px solid var(--line);padding-top:14px;font-variant-numeric:tabular-nums}
+.fee dt{font-size:14px;color:var(--soft)}
+.fee dd{font-weight:700;text-align:right}
+.fee dd.big{font-size:24px;color:var(--navy)}
+.small{font-size:13px;color:var(--soft)}
+.tt-box{overflow-x:auto}
+.timetable{border-collapse:collapse;width:100%;min-width:340px;font-variant-numeric:tabular-nums;font-size:14px}
+.timetable caption{text-align:left;font-weight:700;margin-bottom:8px;font-size:15px}
+.timetable th,.timetable td{border:1px solid var(--line);padding:8px 6px;text-align:center}
+.timetable thead th{background:var(--sky)}
+.timetable tbody th{background:var(--sky);white-space:nowrap;font-weight:700}
+.timetable td.on{background:#FCE9DF;color:#7E2A09;font-weight:700}
+@media (max-width:820px){.panel{grid-template-columns:1fr}}
+@media (max-width:480px){.timetable{font-size:12px}.timetable th,.timetable td{padding:7px 3px}}
+
+/* 体験授業の流れ */
+.trial{background:var(--sky)}
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;counter-reset:s}
+.steps li{background:#fff;border-radius:14px;padding:20px;display:grid;gap:8px;align-content:start;counter-increment:s;border:1px solid var(--line)}
+.steps li::before{content:"STEP " counter(s);font-weight:700;color:var(--act);font-size:14px}
+.steps h3{font-size:17px}
+.steps p{font-size:14px;color:var(--soft)}
+@media (max-width:820px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:440px){.steps{grid-template-columns:1fr}}
+
+/* 合格実績 */
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.result{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.result b{font-size:24px;color:var(--navy);font-variant-numeric:tabular-nums}
+.results-note{margin-top:14px}
+
+/* 保護者の方へ */
+.parents{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,3vw,28px)}
+.parents div{display:grid;gap:8px;align-content:start;border-top:3px solid var(--navy);padding-top:16px}
+.parents h3{font-size:18px}
+.parents p{font-size:15px;color:var(--soft)}
+@media (max-width:820px){.parents{grid-template-columns:1fr}}
+
+.faq-band{background:var(--sky)}
+.faq{display:grid;gap:10px;max-width:820px}
+.faq details{background:#fff;border-radius:12px;border:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 52px 18px 20px;font-weight:700;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"Q.";color:var(--act);margin-right:8px}
+.faq summary::after{content:"+";position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:24px;color:var(--navy)}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 20px 18px;color:var(--soft)}
+
+.access .in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,56px)}
+.info{display:grid;grid-template-columns:7em minmax(0,1fr);border-top:1px solid var(--line)}
+.info dt,.info dd{padding:14px 0;border-bottom:1px solid var(--line)}
+.info dt{font-weight:700;font-size:14px}
+.info dd{font-size:15px}
+.hours{display:grid;gap:2px}
+.map{border-radius:16px;overflow:hidden;min-height:320px;background:#fff;border:1px solid var(--line)}
+.map iframe{width:100%;height:100%;min-height:320px;border:0;display:block}
+@media (max-width:760px){.access .in{grid-template-columns:1fr}.info{grid-template-columns:6em minmax(0,1fr)}}
+
+.last{background:var(--navy);color:#fff;text-align:center}
+.last .in{display:grid;gap:20px;justify-items:center}
+.last p{color:#DCE5F3}
+.last .btn.ghost{background:transparent;color:#fff;border-color:#fff;box-shadow:none}
+.last .btn.ghost:hover{background:rgba(255,255,255,.12)}
+.tel-big{font-weight:700;font-size:clamp(26px,4vw,34px);color:#fff;text-decoration:none;font-variant-numeric:tabular-nums}
+
+footer{padding-block:28px 120px;font-size:13px;color:var(--soft)}
+footer .in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+@media (min-width:761px){footer{padding-bottom:28px}}
+
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:none;gap:8px;padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:#fff;border-top:1px solid var(--line)}
+.dock a{flex:1;display:grid;justify-items:center;gap:2px;padding:8px 4px;min-height:52px;border-radius:10px;font-size:12px;font-weight:700;text-decoration:none;color:var(--navy);border:1px solid var(--line)}
+.dock a.main{flex:1.6;background:var(--act);color:#fff;border-color:var(--act);font-size:13px}
+.dock svg{width:20px;height:20px}
+@media (max-width:760px){.dock{display:flex}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<div style="background:#1D2130;color:#fff;font-size:13px;line-height:1.6;padding:8px max(16px,env(safe-area-inset-left,0px));text-align:center">これは「学習塾・教室向け LPテンプレート」の見本です。店名・住所・料金はすべて架空です。 <a href="https://se30-note.booth.pm/" style="color:#F2DDA4">BOOTHで見る</a></div>
+
+<header>
+  <div class="in bar">
+    <a class="logo" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="4" width="28" height="24" rx="4" fill="#1E3A6E"/><path d="M9 12h14M9 17h14M9 22h8" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg><span data-shop="name">個別指導塾 あおば</span></a>
+    <nav aria-label="ページ内メニュー">
+      <ul>
+        <li><a href="#course">コースと月謝</a></li>
+        <li><a href="#trial">体験授業</a></li>
+        <li><a href="#results">合格実績</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+        <li><a href="#access">アクセス</a></li>
+      </ul>
+    </nav>
+    <a class="btn" data-link="reserve" href="#">体験授業に申し込む</a>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="in">
+    <div class="hero-text">
+      <!-- ✏️ 見出しと説明文 -->
+      <h1><span class="nb">「わからない」を、</span><span class="nb">次の授業までに</span><span class="nb">残さない。</span></h1>
+      <p>講師1人に生徒2人までの個別指導です。授業の最後に、その日わからなかった問題をもう一度一緒に解いてから帰ります。</p>
+      <div class="btns">
+        <a class="btn" data-link="reserve" href="#">無料の体験授業に申し込む</a>
+        <a class="btn ghost" href="#course">学年ごとの月謝を見る</a>
+      </div>
+    </div>
+    <!-- ✏️ 数字は本当のことだけを書いてください -->
+    <div class="hero-card">
+      <h2>あおばの授業</h2>
+      <ul class="points">
+        <li><b>1:2</b><span>講師1人が見る生徒は2人まで</span></li>
+        <li><b>80分</b><span>1回の授業の長さ（小学生は60分）</span></li>
+        <li><b>2回</b><span>定期テスト前の無料対策授業（各学期）</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ✏️ 学年を選ぶ：学年ごとに中身を書きかえます（時間割の「授業」の場所は class="on"） -->
+<section id="course" aria-labelledby="course-title">
+  <div class="in">
+    <div class="head">
+      <h2 id="course-title">コースと月謝</h2>
+      <p class="lead">学年を選ぶと、授業の時間と月謝が表示されます。表示はすべて税込です。</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="学年">
+      <button type="button" role="tab" id="tab-e" aria-controls="p-e" aria-selected="true">小学生</button>
+      <button type="button" role="tab" id="tab-j" aria-controls="p-j" aria-selected="false" tabindex="-1">中学生</button>
+      <button type="button" role="tab" id="tab-h" aria-controls="p-h" aria-selected="false" tabindex="-1">高校生</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-e" aria-labelledby="tab-e">
+      <div class="panel-about">
+        <h3>小学生コース（4〜6年生）</h3>
+        <p>算数と国語が中心です。宿題の進め方やノートの書き方など、勉強の習慣づくりから一緒に取り組みます。</p>
+        <dl class="fee">
+          <dt>週1回（60分）</dt><dd class="big">9,900円</dd>
+          <dt>週2回（60分）</dt><dd>17,600円</dd>
+          <dt>入塾金</dt><dd>11,000円</dd>
+          <dt>教材費</dt><dd>年 6,600円</dd>
+        </dl>
+        <p class="small">※ 料金は記入例です。</p>
+      </div>
+      <div class="tt-box">
+        <table class="timetable">
+          <caption>授業の時間（色のついた時間から選べます）</caption>
+          <thead><tr><th scope="col">時間</th><th scope="col">月</th><th scope="col">火</th><th scope="col">水</th><th scope="col">木</th><th scope="col">金</th><th scope="col">土</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">16:00–17:00</th><td class="on">授業</td><td class="on">授業</td><td class="on">授業</td><td class="on">授業</td><td class="on">授業</td><td>—</td></tr>
+            <tr><th scope="row">17:10–18:10</th><td class="on">授業</td><td>—</td><td class="on">授業</td><td>—</td><td class="on">授業</td><td>—</td></tr>
+            <tr><th scope="row">10:00–11:00</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="on">授業</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-j" aria-labelledby="tab-j" hidden>
+      <div class="panel-about">
+        <h3>中学生コース</h3>
+        <p>学校の教科書に合わせて進めます。定期テストの2週間前からは、学校のワークと過去の出題をもとにした対策に切りかえます。</p>
+        <dl class="fee">
+          <dt>週1回（80分）</dt><dd class="big">14,300円</dd>
+          <dt>週2回（80分）</dt><dd>26,400円</dd>
+          <dt>入塾金</dt><dd>11,000円</dd>
+          <dt>教材費</dt><dd>年 13,200円</dd>
+        </dl>
+        <p class="small">※ 中学3年生は、受験対策の講習（夏・冬）が別にあります。※ 料金は記入例です。</p>
+      </div>
+      <div class="tt-box">
+        <table class="timetable">
+          <caption>授業の時間（色のついた時間から選べます）</caption>
+          <thead><tr><th scope="col">時間</th><th scope="col">月</th><th scope="col">火</th><th scope="col">水</th><th scope="col">木</th><th scope="col">金</th><th scope="col">土</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">17:20–18:40</th><td class="on">授業</td><td class="on">授業</td><td class="on">授業</td><td class="on">授業</td><td class="on">授業</td><td>—</td></tr>
+            <tr><th scope="row">19:00–20:20</th><td class="on">授業</td><td class="on">授業</td><td class="on">授業</td><td class="on">授業</td><td class="on">授業</td><td>—</td></tr>
+            <tr><th scope="row">13:00–14:20</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="on">授業</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-h" aria-labelledby="tab-h" hidden>
+      <div class="panel-about">
+        <h3>高校生コース</h3>
+        <p>英語・数学を中心に、学校の授業の予習と復習、大学受験の対策を行います。部活がある人は、遅い時間の授業も選べます。</p>
+        <dl class="fee">
+          <dt>週1回（80分）</dt><dd class="big">17,600円</dd>
+          <dt>週2回（80分）</dt><dd>33,000円</dd>
+          <dt>入塾金</dt><dd>11,000円</dd>
+          <dt>教材費</dt><dd>必要な分だけ</dd>
+        </dl>
+        <p class="small">※ 料金は記入例です。</p>
+      </div>
+      <div class="tt-box">
+        <table class="timetable">
+          <caption>授業の時間（色のついた時間から選べます）</caption>
+          <thead><tr><th scope="col">時間</th><th scope="col">月</th><th scope="col">火</th><th scope="col">水</th><th scope="col">木</th><th scope="col">金</th><th scope="col">土</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">19:00–20:20</th><td class="on">授業</td><td class="on">授業</td><td class="on">授業</td><td class="on">授業</td><td class="on">授業</td><td>—</td></tr>
+            <tr><th scope="row">20:30–21:50</th><td class="on">授業</td><td class="on">授業</td><td class="on">授業</td><td class="on">授業</td><td class="on">授業</td><td>—</td></tr>
+            <tr><th scope="row">15:00–16:20</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="on">授業</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ✏️ 体験授業の流れ（順番があるのでSTEPつき） -->
+<section class="trial" id="trial" aria-labelledby="trial-title">
+  <div class="in">
+    <div class="head">
+      <h2 id="trial-title">無料の体験授業</h2>
+      <p class="lead">体験授業は2回まで無料です。体験のあとに入塾をおすすめする電話をかけることはありません。</p>
+    </div>
+    <ol class="steps">
+      <li><h3>申し込み</h3><p>申し込みページかお電話で、ご希望の日時をお知らせください。</p></li>
+      <li><h3>体験授業</h3><p>学校の教科書かワークを持ってきてください。いつもの授業と同じ形で行います。</p></li>
+      <li><h3>保護者面談</h3><p>体験のようすと、これからの進め方をお伝えします（約20分）。</p></li>
+      <li><h3>ご家庭で相談</h3><p>入塾するかは、ご家庭で決めてから連絡してください。</p></li>
+    </ol>
+    <div class="btns" style="margin-top:28px">
+      <a class="btn" data-link="reserve" href="#">体験授業に申し込む</a>
+    </div>
+  </div>
+</section>
+
+<!-- ✏️ 合格実績：必ず「本当の数字」と「いつ・だれの実績か」を書きます。記入例のまま公開しないでください -->
+<section id="results" aria-labelledby="results-title">
+  <div class="in">
+    <div class="head">
+      <h2 id="results-title">合格実績</h2>
+      <p class="lead">2026年春の実績です（この教室に在籍していた生徒のみ。講習だけの参加者はふくみません）。</p>
+    </div>
+    <div class="results">
+      <div class="result"><span>都立〇〇高校</span><b>3名</b></div>
+      <div class="result"><span>都立〇〇高校</span><b>5名</b></div>
+      <div class="result"><span>私立〇〇高校</span><b>4名</b></div>
+      <div class="result"><span>〇〇大学</span><b>1名</b></div>
+    </div>
+    <p class="small results-note">※ 上の学校名と人数は記入例です。</p>
+  </div>
+</section>
+
+<!-- ✏️ 保護者の方へ：実際に行っていることだけを書きます -->
+<section aria-labelledby="parents-title" style="padding-top:0">
+  <div class="in">
+    <div class="head"><h2 id="parents-title">保護者のみなさまへ</h2></div>
+    <div class="parents">
+      <div><h3>毎回の授業報告</h3><p>その日に学習した内容と、次回までの宿題をLINEでお送りします。</p></div>
+      <div><h3>学期ごとの面談</h3><p>テストの結果をもとに、次の学期の目標と進め方を一緒に決めます。</p></div>
+      <div><h3>自習室は無料</h3><p>授業のない日も、開いている時間は自習室を使えます。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-band" id="faq" aria-labelledby="faq-title">
+  <div class="in">
+    <div class="head"><h2 id="faq-title">よくある質問</h2></div>
+    <div class="faq">
+      <details><summary>部活があっても通えますか？</summary><p>はい。曜日と時間は、部活の予定に合わせて選べます。大会の前などは振替もできます。</p></details>
+      <details><summary>授業を休んだときはどうなりますか？</summary><p>前日までにご連絡いただければ、同じ月のうちに振替授業を行います。</p></details>
+      <details><summary>月謝のほかにかかるお金はありますか？</summary><p>入塾金と教材費のほか、夏・冬の講習は参加する場合のみ別料金です。申し込みの前に金額をお知らせします。</p></details>
+      <details><summary>途中でやめることはできますか？</summary><p>はい。前の月の末日までにお知らせください。契約の内容によっては、法律にもとづく中途解約の決まりがあります。申し込みの時に書面でご説明します。</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="access" id="access" aria-labelledby="access-title">
+  <div class="in">
+    <div>
+      <div class="head"><h2 id="access-title">教室の場所・受付時間</h2></div>
+      <dl class="info">
+        <dt>住所</dt><dd>〒<span data-shop="zip">000-0000</span><br><span data-shop="address">東京都〇〇区〇〇町7-8-9</span></dd>
+        <dt>アクセス</dt><dd data-shop="access">〇〇駅 東口から徒歩2分</dd>
+        <dt>受付時間</dt><dd><div class="hours" data-hours></div></dd>
+        <dt>自転車・車</dt><dd data-shop="parking">自転車は塾の前に置けます</dd>
+        <dt>月謝の支払い</dt><dd data-shop="payment">口座振替</dd>
+        <dt>電話</dt><dd><a data-link="tel" data-shop="tel" href="#">03-0000-0000</a></dd>
+      </dl>
+    </div>
+    <div class="map" data-map></div>
+  </div>
+</section>
+
+<section class="last" aria-labelledby="last-title">
+  <div class="in">
+    <h2 id="last-title">まずは体験授業から</h2>
+    <p>申し込みページは24時間受け付けています。お電話は受付時間内にお願いします。</p>
+    <div class="btns" style="justify-content:center">
+      <a class="btn" data-link="reserve" href="#">体験授業に申し込む</a>
+      <a class="btn ghost" data-link="line" href="#">LINEで質問する</a>
+    </div>
+    <a class="tel-big" data-link="tel" data-shop="tel" href="#">03-0000-0000</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="in"><span>© <span data-year></span> <span data-shop="name">個別指導塾 あおば</span></span></div>
+</footer>
+
+<div class="dock" aria-label="申し込み・お問い合わせ">
+  <a data-link="tel" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>電話</a>
+  <a class="main" data-link="reserve" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 10h8M8 14h5"/></svg>体験授業に申し込む</a>
+  <a data-link="line" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 11.5c0 4.1-4 7.5-9 7.5-1 0-2-.1-2.9-.4L4 20l1.4-3.6C4 15 3 13.4 3 11.5 3 7.4 7 4 12 4s9 3.4 9 7.5z"/></svg>LINE</a>
+</div>
+
+<!-- ここから下は、さわらなくて大丈夫です -->
+<script>
+(function(){
+  var S = window.SHOP || {};
+  document.querySelectorAll("[data-shop]").forEach(function(el){ var v = S[el.getAttribute("data-shop")]; if (v) el.textContent = v; });
+  document.querySelectorAll("[data-link]").forEach(function(el){
+    var k = el.getAttribute("data-link");
+    var v = k === "tel" ? (S.tel ? "tel:" + S.tel.replace(/[^0-9+]/g, "") : "") : S[k];
+    if (v) { el.href = v; if (/^https?:/.test(v)) { el.target = "_blank"; el.rel = "noopener"; } } else { el.hidden = true; }
+  });
+  var h = document.querySelector("[data-hours]");
+  if (h && S.hours) h.innerHTML = S.hours.map(function(r){ return "<span><b>" + r[0] + "</b>　" + r[1] + "</span>"; }).join("");
+  var m = document.querySelector("[data-map]");
+  if (m && S.address) { var f = document.createElement("iframe"); f.title = "地図：" + S.address; f.loading = "lazy";
+    f.src = "https://maps.google.com/maps?q=" + encodeURIComponent(S.address) + "&z=16&output=embed"; m.appendChild(f); }
+  document.querySelectorAll("[data-year]").forEach(function(el){ el.textContent = new Date().getFullYear(); });
+
+  /* 学年のタブ（矢印キーでも切りかえられます） */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function select(t){
+    tabs.forEach(function(x){ var on = x === t; x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1;
+      document.getElementById(x.getAttribute("aria-controls")).hidden = !on; });
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener("click", function(){ select(t); });
+    t.addEventListener("keydown", function(e){
+      var n = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (n) { var nt = tabs[(i + n + tabs.length) % tabs.length]; select(nt); nt.focus(); e.preventDefault(); }
+    });
+  });
+
+  var ld = { "@context":"https://schema.org", "@type":["EducationalOrganization","LocalBusiness"], "name":S.name, "alternateName":S.nameKana,
+    "description":S.catch, "telephone":S.tel, "url":location.href.split("#")[0],
+    "address":{ "@type":"PostalAddress", "postalCode":S.zip, "streetAddress":S.address, "addressCountry":"JP" } };
+  var s = document.createElement("script"); s.type = "application/ld+json"; s.textContent = JSON.stringify(ld); document.head.appendChild(s);
+})();
+</script>
+</body>
+</html>

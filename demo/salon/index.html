@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- ============================================================
+  ✏️ 書きかえる場所は、まずこの「お店の情報」だけです。
+  電話番号・LINE・予約ページ・住所・営業時間は、ここを直すと
+  ページの中の全部の場所（ボタン・地図・下の固定バー・Google向けの情報）に反映されます。
+  使わない項目は "" （空）にすると、そのボタンが自動で消えます。
+============================================================ -->
+<script>
+window.SHOP = {
+  name: "hair salon mimosa",                 // 店名
+  nameKana: "ヘアサロン ミモザ",                // 店名の読み（検索用）
+  catch: "似合う、を一緒に探す美容室",            // 一言紹介（Google・SNSで表示）
+  tel: "03-0000-0000",                       // 電話番号（"" で電話ボタンを消す）
+  line: "https://line.me/R/ti/p/@example",   // LINE公式アカウントのURL（"" で消す）
+  reserve: "https://example.com/reserve",    // ネット予約のURL（ホットペッパー等。"" で消す）
+  instagram: "https://www.instagram.com/",   // Instagram（"" で消す）
+  zip: "000-0000",
+  address: "東京都〇〇区〇〇町1-2-3 ミモザビル2F",  // 住所（地図もこの住所で表示）
+  access: "〇〇駅 南口から徒歩3分",
+  hours: [                                   // 営業時間（行は増やせます）
+    ["平日", "10:00 – 20:00（最終受付 19:00）"],
+    ["土・日・祝", "9:00 – 19:00（最終受付 18:00）"],
+    ["定休日", "毎週火曜日・第3水曜日"]
+  ],
+  parking: "なし（近くにコインパーキングがあります）",
+  payment: "現金・クレジットカード・交通系IC・QRコード決済"
+};
+</script>
+<title>hair salon mimosa｜〇〇駅の美容室</title>
+<meta name="description" content="〇〇駅 南口から徒歩3分の美容室。カウンセリングに時間をかけ、扱いやすさまで考えたカットとカラーをご提案します。">
+<meta property="og:title" content="hair salon mimosa｜〇〇駅の美容室">
+<meta property="og:description" content="カウンセリングに時間をかけ、扱いやすさまで考えたカットとカラーをご提案します。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* ============================================================
+  ✏️ 色を変えるときは、ここの5色だけを変えます。
+  layout: 縦書きの見出し＋アーチ形の写真。メニューは紙のメニュー表の形。
+============================================================ */
+:root{
+  --paper:#F2F2F0;   /* 背景 */
+  --ink:#26262B;     /* 文字 */
+  --plum:#5D4566;    /* メインの色（ボタン・見出し） */
+  --mist:#E3E0E6;    /* 帯の背景 */
+  --line:#CBC6CF;    /* 線 */
+  --soft:#6C6871;    /* うすい文字 */
+  --serif:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
+  --sans:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+.nb{display:inline-block}
+@media (max-width:760px){.bar>.btn,.bar-right>.btn{display:none}.logo{white-space:nowrap}}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.9;letter-spacing:.02em;-webkit-text-size-adjust:100%}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--plum)}
+:focus-visible{outline:3px solid var(--plum);outline-offset:3px;border-radius:4px}
+h1,h2,h3,p,ul,ol,dl,dd,figure{margin:0}
+h2{font-family:var(--serif);font-weight:700;font-size:clamp(24px,3.4vw,32px);line-height:1.5;text-wrap:balance}
+.skip{position:absolute;left:-9999px}.skip:focus{left:16px;top:12px;z-index:100;background:#fff;padding:8px 12px}
+.in{max-width:1080px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+section{padding-block:clamp(64px,10vw,112px)}
+.lead{color:var(--soft);max-width:36em}
+.head{display:grid;gap:14px;margin-bottom:clamp(32px,5vw,48px)}
+
+/* ボタン */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 26px;border-radius:999px;font-weight:700;text-decoration:none;background:var(--plum);color:#fff;border:1px solid var(--plum)}
+.btn:hover{background:#4A3652}
+.btn.ghost{background:transparent;color:var(--plum)}
+.btn.ghost:hover{background:var(--mist)}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* ヘッダー */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(242,242,240,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.logo{font-family:var(--serif);font-size:20px;font-weight:700;text-decoration:none;color:var(--ink);letter-spacing:.06em}
+nav ul{display:flex;gap:24px;list-style:none;padding:0;font-size:14px}
+nav a{color:var(--ink);text-decoration:none}nav a:hover{color:var(--plum)}
+.bar .btn{min-height:44px;padding:0 20px;font-size:14px}
+@media (max-width:760px){nav{display:none}}
+
+/* ファーストビュー */
+.hero{padding-block:clamp(40px,7vw,88px) clamp(56px,8vw,96px)}
+.hero .in{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1.05fr);gap:clamp(20px,4vw,56px);align-items:end}
+.tate{writing-mode:vertical-rl;font-family:var(--serif);font-weight:700;font-size:clamp(34px,5vw,58px);line-height:1.5;letter-spacing:.14em;align-self:start;height:max-content}
+.tate span{display:block}
+.arch{border-radius:999px 999px 18px 18px;overflow:hidden;aspect-ratio:3/4;background:var(--mist);max-width:100%}
+.arch img{width:100%;height:100%;object-fit:cover}
+.hero-text{display:grid;gap:22px;padding-bottom:8px}
+.hero-text p{color:var(--soft)}
+.hero-text .btns{display:flex;flex-wrap:wrap;gap:12px}
+.hero-note{font-size:13px;color:var(--soft)}
+@media (max-width:760px){
+  .hero .in{grid-template-columns:auto minmax(0,1fr);align-items:start}
+  .hero-text{grid-column:1/-1}
+}
+
+/* はじめての方へ（ご来店の流れ） */
+.flow{background:var(--mist)}
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;counter-reset:s;border-top:1px solid var(--line)}
+.steps li{padding:22px 20px 0 0;display:grid;gap:8px;counter-increment:s}
+.steps li::before{content:counter(s);font-family:var(--serif);font-size:28px;color:var(--plum);line-height:1}
+.steps h3{font-size:17px}
+.steps p{font-size:14px;color:var(--soft)}
+@media (max-width:760px){.steps{grid-template-columns:1fr 1fr;row-gap:24px}}
+@media (max-width:360px){.steps{grid-template-columns:1fr}}
+
+/* メニュー（紙のメニュー表） */
+.menu-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,64px)}
+.menu-group{display:grid;gap:4px;align-content:start}
+.menu-group h3{font-family:var(--serif);font-size:20px;padding-bottom:10px;border-bottom:1px solid var(--ink);margin-bottom:6px}
+.item{display:grid;grid-template-columns:auto 1fr auto;align-items:baseline;gap:10px;padding:10px 0}
+.item .dots{border-bottom:1px dotted var(--line);transform:translateY(-5px)}
+.item .price{font-variant-numeric:tabular-nums;font-weight:500;white-space:nowrap}
+.item small{grid-column:1/-1;color:var(--soft);font-size:13px;line-height:1.7;margin-top:-4px}
+.menu-note{margin-top:28px;font-size:13px;color:var(--soft)}
+@media (max-width:760px){.menu-wrap{grid-template-columns:1fr}}
+
+/* スタイリスト */
+.staff{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,4vw,48px)}
+.person{display:grid;grid-template-columns:120px minmax(0,1fr);gap:20px;align-items:start}
+.person img{border-radius:50%;aspect-ratio:1;object-fit:cover;background:var(--mist)}
+.person h3{font-family:var(--serif);font-size:20px;line-height:1.5}
+.person .role{font-size:13px;color:var(--soft)}
+.person p{font-size:15px;margin-top:8px}
+@media (max-width:760px){.staff{grid-template-columns:1fr}.person{grid-template-columns:96px minmax(0,1fr)}}
+
+/* スタイル写真 */
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gallery figure{display:grid;gap:8px}
+.gallery img{aspect-ratio:4/5;object-fit:cover;border-radius:12px;background:var(--mist)}
+.gallery figcaption{font-size:13px;color:var(--soft)}
+@media (max-width:560px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.gallery figure:nth-child(3){display:none}}
+
+/* よくある質問 */
+.faq{display:grid;border-top:1px solid var(--line);max-width:780px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:20px 40px 20px 0;font-weight:700;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:8px;top:50%;width:10px;height:10px;border-right:2px solid var(--plum);border-bottom:2px solid var(--plum);transform:translateY(-70%) rotate(45deg);transition:transform .2s}
+.faq details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+.faq details p{padding:0 0 20px;color:var(--soft)}
+
+/* アクセス */
+.access{background:var(--mist)}
+.access .in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,56px)}
+.info{display:grid;grid-template-columns:7em minmax(0,1fr);border-top:1px solid var(--line)}
+.info dt,.info dd{padding:14px 0;border-bottom:1px solid var(--line)}
+.info dt{font-weight:700;font-size:14px}
+.info dd{font-size:15px}
+.hours{display:grid;gap:2px}
+.map{border-radius:16px;overflow:hidden;min-height:320px;background:var(--paper);border:1px solid var(--line)}
+.map iframe{width:100%;height:100%;min-height:320px;border:0;display:block}
+@media (max-width:760px){.access .in{grid-template-columns:1fr}.info{grid-template-columns:6em minmax(0,1fr)}}
+
+/* 最後の予約 */
+.last{text-align:center}
+.last .in{display:grid;gap:22px;justify-items:center}
+.last .btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.tel-big{font-family:var(--serif);font-size:clamp(26px,4vw,34px);font-variant-numeric:tabular-nums;letter-spacing:.06em;color:var(--ink);text-decoration:none}
+
+footer{border-top:1px solid var(--line);padding-block:28px 120px;font-size:13px;color:var(--soft)}
+footer .in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+@media (min-width:761px){footer{padding-bottom:28px}}
+
+/* スマホの下に固定する予約バー */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:none;gap:8px;padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:rgba(242,242,240,.96);border-top:1px solid var(--line);backdrop-filter:blur(8px)}
+.dock a{flex:1;display:grid;justify-items:center;gap:2px;padding:8px 4px;min-height:52px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none;color:var(--plum);border:1px solid var(--line);background:#fff}
+.dock a.main{background:var(--plum);color:#fff;border-color:var(--plum)}
+.dock svg{width:20px;height:20px}
+@media (max-width:760px){.dock{display:flex}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<div style="background:#1D2130;color:#fff;font-size:13px;line-height:1.6;padding:8px max(16px,env(safe-area-inset-left,0px));text-align:center">これは「美容室・ヘアサロン向け LPテンプレート」の見本です。店名・住所・料金はすべて架空です。 <a href="https://se30-note.booth.pm/" style="color:#F2DDA4">BOOTHで見る</a></div>
+
+<header>
+  <div class="in bar">
+    <a class="logo" href="#top" data-shop="name">hair salon mimosa</a>
+    <nav aria-label="ページ内メニュー">
+      <ul>
+        <li><a href="#menu">メニュー・料金</a></li>
+        <li><a href="#staff">スタイリスト</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+        <li><a href="#access">アクセス</a></li>
+      </ul>
+    </nav>
+    <a class="btn" data-link="reserve" href="#">ネットで予約</a>
+  </div>
+</header>
+
+<main id="main">
+<!-- ✏️ ファーストビュー：見出し・説明文・写真（images/hero.svg を自分の写真に変える） -->
+<section class="hero" id="top">
+  <div class="in">
+    <h1 class="tate"><span>似合う、を</span><span>一緒に探す。</span></h1>
+    <div class="arch"><img src="images/hero.svg" alt="明るい店内の様子" width="600" height="800"></div>
+    <div class="hero-text">
+      <p>髪のクセ、毎朝かけられる時間、職場の雰囲気。カウンセリングでゆっくりお話をうかがってから、家でも扱いやすいスタイルをご提案します。</p>
+      <div class="btns">
+        <a class="btn" data-link="reserve" href="#">ネットで予約する</a>
+        <a class="btn ghost" data-link="line" href="#">LINEで相談する</a>
+      </div>
+      <p class="hero-note"><span data-shop="access">〇〇駅 南口から徒歩3分</span>／定休日 毎週火曜日</p>
+    </div>
+  </div>
+</section>
+
+<!-- ✏️ はじめての方へ：ご来店の流れ（順番がある内容なので番号つき） -->
+<section class="flow" aria-labelledby="flow-title">
+  <div class="in">
+    <div class="head">
+      <h2 id="flow-title">はじめての方へ</h2>
+      <p class="lead">ご予約からお帰りまでの流れです。気になることは、どの段階でも遠慮なくお聞きください。</p>
+    </div>
+    <ol class="steps">
+      <li><h3>ご予約</h3><p>ネット予約・LINE・お電話から。ご希望のスタイリストも選べます。</p></li>
+      <li><h3>カウンセリング</h3><p>なりたい雰囲気と、普段のお手入れの仕方をうかがいます。写真があれば見せてください。</p></li>
+      <li><h3>施術</h3><p>途中で長さや色味を確認しながら進めます。</p></li>
+      <li><h3>仕上げとお手入れ</h3><p>ご自宅での乾かし方やスタイリングのコツをお伝えします。</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ✏️ メニュー・料金：価格は「税込」の総額で書きます -->
+<section id="menu" aria-labelledby="menu-title">
+  <div class="in">
+    <div class="head">
+      <h2 id="menu-title">メニュー・料金</h2>
+      <p class="lead">表示はすべて税込価格です。髪の長さや量によって変わる場合は、施術の前にお伝えします。</p>
+    </div>
+    <div class="menu-wrap">
+      <div class="menu-group">
+        <h3>カット</h3>
+        <div class="item"><span>カット（シャンプー・ブロー込み）</span><span class="dots"></span><span class="price">5,500円</span></div>
+        <div class="item"><span>前髪カット</span><span class="dots"></span><span class="price">1,100円</span></div>
+        <div class="item"><span>学生カット</span><span class="dots"></span><span class="price">4,400円</span><small>中学生・高校生・大学生の方。学生証をお持ちください。</small></div>
+        <h3 style="margin-top:28px">カラー</h3>
+        <div class="item"><span>カット＋カラー</span><span class="dots"></span><span class="price">11,000円</span></div>
+        <div class="item"><span>根元のリタッチカラー</span><span class="dots"></span><span class="price">6,600円</span><small>伸びた根元（2cmまで）を染めます。</small></div>
+        <div class="item"><span>白髪ぼかしハイライト</span><span class="dots"></span><span class="price">8,800円〜</span></div>
+      </div>
+      <div class="menu-group">
+        <h3>パーマ・ストレート</h3>
+        <div class="item"><span>カット＋パーマ</span><span class="dots"></span><span class="price">13,200円</span></div>
+        <div class="item"><span>縮毛矯正（カット込み）</span><span class="dots"></span><span class="price">19,800円〜</span><small>髪の長さで料金が変わります。予約の時にお知らせください。</small></div>
+        <h3 style="margin-top:28px">ヘアケア</h3>
+        <div class="item"><span>集中トリートメント</span><span class="dots"></span><span class="price">3,300円</span></div>
+        <div class="item"><span>ヘッドスパ（20分）</span><span class="dots"></span><span class="price">3,850円</span></div>
+      </div>
+    </div>
+    <p class="menu-note">※ 上の料金は記入例です。お店の実際の料金に書きかえてください。</p>
+  </div>
+</section>
+
+<!-- ✏️ スタイリスト：写真は images/staff1.svg などを差しかえ -->
+<section id="staff" aria-labelledby="staff-title" style="padding-top:0">
+  <div class="in">
+    <div class="head"><h2 id="staff-title">スタイリスト</h2></div>
+    <div class="staff">
+      <div class="person">
+        <img src="images/staff1.svg" alt="スタイリスト 山田の写真" width="240" height="240">
+        <div>
+          <p class="role">店長・スタイリスト（美容師歴15年）</p>
+          <h3>山田 花子</h3>
+          <p>くせ毛を活かすカットが得意です。「朝、手ぐしで決まる」を目標にしています。</p>
+        </div>
+      </div>
+      <div class="person">
+        <img src="images/staff2.svg" alt="スタイリスト 佐藤の写真" width="240" height="240">
+        <div>
+          <p class="role">スタイリスト（美容師歴8年）</p>
+          <h3>佐藤 美咲</h3>
+          <p>白髪をなじませるカラーと、透明感のある色づくりが得意です。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ✏️ スタイル写真：3枚（スマホでは2枚表示） -->
+<section aria-labelledby="style-title" style="padding-top:0">
+  <div class="in">
+    <div class="head"><h2 id="style-title">スタイル</h2></div>
+    <div class="gallery">
+      <figure><img src="images/style1.svg" alt="ショートボブのスタイル" width="400" height="500" loading="lazy"><figcaption>手ぐしで決まるショートボブ</figcaption></figure>
+      <figure><img src="images/style2.svg" alt="ミディアムのスタイル" width="400" height="500" loading="lazy"><figcaption>白髪をぼかすハイライト</figcaption></figure>
+      <figure><img src="images/style3.svg" alt="ロングのスタイル" width="400" height="500" loading="lazy"><figcaption>まとまるロングのレイヤー</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ✏️ よくある質問：質問と答えのセットを増やせます -->
+<section id="faq" aria-labelledby="faq-title" style="padding-top:0">
+  <div class="in">
+    <div class="head"><h2 id="faq-title">よくある質問</h2></div>
+    <div class="faq">
+      <details><summary>当日の予約はできますか？</summary><p>空きがあれば可能です。お電話かLINEでお問い合わせください。</p></details>
+      <details><summary>子ども連れでも行けますか？</summary><p>はい。ベビーカーのまま入れる席をご用意しています。予約の時にお知らせください。</p></details>
+      <details><summary>キャンセルはいつまでにすればよいですか？</summary><p>前日までにご連絡ください。当日のキャンセルは、お電話でお願いします。</p></details>
+      <details><summary>どんな支払い方法が使えますか？</summary><p data-shop="payment">現金・クレジットカード・交通系IC・QRコード決済</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- アクセス：住所・営業時間・地図は、いちばん上の「お店の情報」から自動で入ります -->
+<section class="access" id="access" aria-labelledby="access-title">
+  <div class="in">
+    <div>
+      <div class="head"><h2 id="access-title">アクセス・営業時間</h2></div>
+      <dl class="info">
+        <dt>住所</dt><dd>〒<span data-shop="zip">000-0000</span><br><span data-shop="address">東京都〇〇区〇〇町1-2-3</span></dd>
+        <dt>アクセス</dt><dd data-shop="access">〇〇駅 南口から徒歩3分</dd>
+        <dt>営業時間</dt><dd><div class="hours" data-hours></div></dd>
+        <dt>駐車場</dt><dd data-shop="parking">なし</dd>
+        <dt>電話</dt><dd><a data-link="tel" data-shop="tel" href="#">03-0000-0000</a></dd>
+      </dl>
+    </div>
+    <div class="map" data-map></div>
+  </div>
+</section>
+
+<section class="last" aria-labelledby="last-title">
+  <div class="in">
+    <h2 id="last-title">ご予約・ご相談</h2>
+    <p class="lead">ネット予約は24時間受け付けています。髪のお悩みだけのご相談も、LINEでどうぞ。</p>
+    <div class="btns">
+      <a class="btn" data-link="reserve" href="#">ネットで予約する</a>
+      <a class="btn ghost" data-link="line" href="#">LINEで相談する</a>
+    </div>
+    <a class="tel-big" data-link="tel" data-shop="tel" href="#">03-0000-0000</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="in">
+    <span>© <span data-year></span> <span data-shop="name">hair salon mimosa</span></span>
+    <a data-link="instagram" href="#">Instagram</a>
+  </div>
+</footer>
+
+<!-- スマホのとき画面の下に出る予約バー -->
+<div class="dock" aria-label="予約・お問い合わせ">
+  <a data-link="tel" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>電話</a>
+  <a data-link="line" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 11.5c0 4.1-4 7.5-9 7.5-1 0-2-.1-2.9-.4L4 20l1.4-3.6C4 15 3 13.4 3 11.5 3 7.4 7 4 12 4s9 3.4 9 7.5z"/></svg>LINE</a>
+  <a class="main" data-link="reserve" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>ネット予約</a>
+</div>
+
+<!-- ここから下は、さわらなくて大丈夫です（お店の情報をページに入れるしくみ） -->
+<script>
+(function(){
+  var S = window.SHOP || {};
+  document.querySelectorAll("[data-shop]").forEach(function(el){
+    var v = S[el.getAttribute("data-shop")]; if (v) el.textContent = v;
+  });
+  document.querySelectorAll("[data-link]").forEach(function(el){
+    var k = el.getAttribute("data-link");
+    var v = k === "tel" ? (S.tel ? "tel:" + S.tel.replace(/[^0-9+]/g, "") : "") : S[k];
+    if (v) { el.href = v; if (/^https?:/.test(v)) { el.target = "_blank"; el.rel = "noopener"; } }
+    else { el.hidden = true; }
+  });
+  var h = document.querySelector("[data-hours]");
+  if (h && S.hours) h.innerHTML = S.hours.map(function(r){ return "<span><b>" + r[0] + "</b>　" + r[1] + "</span>"; }).join("");
+  var m = document.querySelector("[data-map]");
+  if (m && S.address) {
+    var f = document.createElement("iframe");
+    f.title = "地図：" + S.address; f.loading = "lazy";
+    f.src = "https://maps.google.com/maps?q=" + encodeURIComponent(S.address) + "&z=16&output=embed";
+    m.appendChild(f);
+  }
+  document.querySelectorAll("[data-year]").forEach(function(el){ el.textContent = new Date().getFullYear(); });
+  /* Google向けのお店の情報（構造化データ）を自動で作ります */
+  var ld = { "@context":"https://schema.org", "@type":"HairSalon", "name":S.name, "alternateName":S.nameKana,
+    "description":S.catch, "telephone":S.tel, "url":location.href.split("#")[0],
+    "address":{ "@type":"PostalAddress", "postalCode":S.zip, "streetAddress":S.address, "addressCountry":"JP" } };
+  var s = document.createElement("script"); s.type = "application/ld+json"; s.textContent = JSON.stringify(ld);
+  document.head.appendChild(s);
+})();
+</script>
+</body>
+</html>

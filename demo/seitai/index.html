@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- ============================================================
+  ✏️ 書きかえる場所は、まずこの「お店の情報」だけです。
+  電話番号・予約ページ・LINE・住所・受付時間は、ここを直すと
+  ページの中の全部の場所（ボタン・地図・下の固定バー・Google向けの情報）に反映されます。
+  使わない項目は "" （空）にすると、そのボタンが自動で消えます。
+============================================================ -->
+<script>
+window.SHOP = {
+  name: "ひだまり整体院",                     // 院名
+  nameKana: "ひだまりせいたいいん",
+  catch: "からだの「つらい」を、原因から見直す整体院", // 一言紹介（Google・SNSで表示）
+  tel: "03-0000-0000",                       // 電話番号（"" で電話ボタンを消す）
+  reserve: "https://example.com/reserve",    // ネット予約のURL（"" で消す）
+  line: "https://line.me/R/ti/p/@example",   // LINE公式アカウントのURL（"" で消す）
+  zip: "000-0000",
+  address: "東京都〇〇区〇〇町4-5-6 ひだまりビル1F",
+  access: "〇〇駅 北口から徒歩5分",
+  hours: [
+    ["月〜金", "10:00 – 20:00（最終受付 19:00）"],
+    ["土", "9:00 – 17:00（最終受付 16:00）"],
+    ["休み", "日曜・祝日"]
+  ],
+  parking: "院の前に2台（無料）",
+  payment: "現金・クレジットカード・QRコード決済"
+};
+</script>
+<title>ひだまり整体院｜〇〇駅の整体</title>
+<meta name="description" content="〇〇駅 北口から徒歩5分の整体院。お話と姿勢の確認に時間をかけ、肩・首・腰などのつらさの原因から一緒に見直します。完全予約制。">
+<meta property="og:title" content="ひだまり整体院｜〇〇駅の整体">
+<meta property="og:description" content="お話と姿勢の確認に時間をかけ、つらさの原因から一緒に見直します。完全予約制。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+/* ============================================================
+  ✏️ 色を変えるときは、ここの色だけを変えます。
+  layout: 「どこがつらいですか？」の体の図から選べるファーストビュー。
+============================================================ */
+:root{
+  --base:#F5F6F2;   /* 背景 */
+  --ink:#1F2B28;    /* 文字 */
+  --pine:#24564B;   /* メインの色（ボタン・見出し） */
+  --sage:#DDE7E0;   /* 帯の背景・体の図 */
+  --sun:#F2C76E;    /* 体の図で選んだ場所 */
+  --line:#C6D2CA;   /* 線 */
+  --soft:#53625D;   /* うすい文字 */
+  --round:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;
+  --sans:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+.nb{display:inline-block}
+@media (max-width:760px){.bar>.btn,.bar-right>.btn{display:none}.logo{white-space:nowrap}}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--base);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.85;-webkit-text-size-adjust:100%}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--pine)}
+:focus-visible{outline:3px solid var(--pine);outline-offset:3px;border-radius:6px}
+h1,h2,h3,p,ul,ol,dl,dd{margin:0}
+h1,h2,h3{font-family:var(--round);font-weight:700;text-wrap:balance}
+h2{font-size:clamp(24px,3.2vw,30px);line-height:1.5}
+.skip{position:absolute;left:-9999px}.skip:focus{left:16px;top:12px;z-index:100;background:#fff;padding:8px 12px}
+.in{max-width:1080px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+section{padding-block:clamp(60px,9vw,104px)}
+.head{display:grid;gap:12px;margin-bottom:clamp(28px,4vw,44px)}
+.lead{color:var(--soft);max-width:38em}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:0 28px;border-radius:14px;font-weight:700;text-decoration:none;background:var(--pine);color:#fff;border:2px solid var(--pine)}
+.btn:hover{background:#1B443B;border-color:#1B443B}
+.btn.ghost{background:#fff;color:var(--pine)}
+.btn.ghost:hover{background:var(--sage)}
+
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(245,246,242,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.logo{font-family:var(--round);font-weight:700;font-size:20px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo svg{width:28px;height:28px}
+nav ul{display:flex;gap:22px;list-style:none;padding:0;font-size:14px}
+nav a{color:var(--ink);text-decoration:none}nav a:hover{color:var(--pine)}
+.bar-right{display:flex;align-items:center;gap:16px}
+.bar-tel{font-weight:700;color:var(--ink);text-decoration:none;font-variant-numeric:tabular-nums}
+.bar .btn{min-height:44px;padding:0 18px;font-size:14px;border-radius:12px}
+@media (max-width:860px){nav,.bar-tel{display:none}}
+
+/* ファーストビュー：体の図 */
+.hero{padding-block:clamp(36px,6vw,72px) clamp(56px,8vw,88px)}
+.hero .in{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center}
+.hero h1{font-size:clamp(28px,3.8vw,42px);line-height:1.5}
+.hero-text{display:grid;gap:22px}
+.hero-text p{color:var(--soft)}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;list-style:none;padding:0;font-size:14px;color:var(--soft)}
+.facts li{display:flex;align-items:center;gap:6px}
+.facts li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--pine)}
+
+.finder{background:#fff;border:1px solid var(--line);border-radius:24px;padding:clamp(20px,3vw,32px);display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;align-items:start}
+.finder h2{grid-column:1/-1;font-size:20px}
+.body-map{width:100%;max-width:150px}
+.body-map .base{fill:var(--sage)}
+.body-map .zone:not(.on){fill:#C9D8CE}
+.body-map .zone{fill:var(--sage);stroke:transparent;stroke-width:2;cursor:pointer;transition:fill .2s}
+.body-map .zone.on{fill:var(--sun);stroke:var(--pine)}
+.picks{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.picks button{font:inherit;font-weight:700;font-size:14px;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.picks button[aria-pressed="true"]{border-color:var(--pine);background:var(--pine);color:#fff}
+.answer{display:grid;gap:10px}
+.answer h3{font-size:16px}
+.answer ul{padding-left:1.2em;color:var(--ink)}
+.answer p{color:var(--soft);font-size:15px}
+.answer .course{font-size:14px;background:var(--sage);border-radius:10px;padding:10px 14px;color:var(--ink)}
+@media (max-width:860px){.hero .in{grid-template-columns:1fr}}
+@media (max-width:440px){.finder{grid-template-columns:96px minmax(0,1fr);gap:16px}}
+
+/* 大切なお知らせ */
+.notice{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px;font-size:14px;color:var(--soft);display:flex;gap:12px;align-items:flex-start;margin-top:28px}
+.notice svg{flex:none;width:22px;height:22px;color:var(--pine);margin-top:3px}
+
+/* 初回の流れ */
+.flow{background:var(--sage)}
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;counter-reset:s}
+.steps li{background:#fff;border-radius:18px;padding:22px;display:grid;gap:8px;align-content:start;counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--pine);color:#fff;font-family:var(--round);font-weight:700}
+.steps h3{font-size:17px}
+.steps p{font-size:14px;color:var(--soft)}
+.steps .time{font-size:13px;color:var(--pine);font-weight:700}
+@media (max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:440px){.steps{grid-template-columns:1fr}}
+
+/* 料金 */
+.price-table{width:100%;border-collapse:collapse;background:#fff;border-radius:18px;overflow:hidden;font-variant-numeric:tabular-nums}
+.price-table th,.price-table td{padding:18px 20px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.price-table thead th{background:var(--pine);color:#fff;font-size:14px}
+.price-table tbody th{font-family:var(--round);font-size:17px;width:38%}
+.price-table td.yen{font-weight:700;font-size:18px;white-space:nowrap}
+.price-table small{display:block;font-weight:400;font-size:13px;color:var(--soft)}
+.table-box{overflow-x:auto;border-radius:18px;border:1px solid var(--line)}
+.price-note{margin-top:16px;font-size:14px;color:var(--soft)}
+
+/* 院長 */
+.owner{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:clamp(24px,5vw,56px);align-items:center}
+.owner img{border-radius:24px;aspect-ratio:4/5;object-fit:cover;background:var(--sage)}
+.owner-text{display:grid;gap:14px}
+.owner .name{font-family:var(--round);font-size:22px;font-weight:700}
+.owner .role{font-size:14px;color:var(--soft)}
+.career{list-style:none;padding:0;display:grid;gap:4px;font-size:14px;color:var(--soft);border-top:1px solid var(--line);padding-top:14px}
+@media (max-width:700px){.owner{grid-template-columns:1fr}.owner img{max-width:280px}}
+
+/* よくある質問 */
+.faq-band{background:var(--sage)}
+.faq{display:grid;gap:10px;max-width:800px}
+.faq details{background:#fff;border-radius:14px}
+.faq summary{cursor:pointer;list-style:none;padding:18px 52px 18px 20px;font-weight:700;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:24px;color:var(--pine);font-weight:400}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 20px 18px;color:var(--soft)}
+
+/* アクセス */
+.access .in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,56px)}
+.info{display:grid;grid-template-columns:7em minmax(0,1fr);border-top:1px solid var(--line)}
+.info dt,.info dd{padding:14px 0;border-bottom:1px solid var(--line)}
+.info dt{font-weight:700;font-size:14px}
+.info dd{font-size:15px}
+.hours{display:grid;gap:2px}
+.map{border-radius:20px;overflow:hidden;min-height:320px;background:#fff;border:1px solid var(--line)}
+.map iframe{width:100%;height:100%;min-height:320px;border:0;display:block}
+@media (max-width:760px){.access .in{grid-template-columns:1fr}.info{grid-template-columns:6em minmax(0,1fr)}}
+
+.last{background:var(--pine);color:#fff;text-align:center}
+.last .in{display:grid;gap:20px;justify-items:center}
+.last p{color:#DDE7E0}
+.last .btn{background:#fff;color:var(--pine);border-color:#fff}
+.last .btn:hover{background:var(--sage)}
+.last .btn.ghost{background:transparent;color:#fff;border-color:#fff}
+.last .btn.ghost:hover{background:rgba(255,255,255,.12)}
+.tel-big{font-family:var(--round);font-weight:700;font-size:clamp(26px,4vw,34px);color:#fff;text-decoration:none;font-variant-numeric:tabular-nums;letter-spacing:.04em}
+
+footer{padding-block:28px 120px;font-size:13px;color:var(--soft)}
+footer .in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+@media (min-width:761px){footer{padding-bottom:28px}}
+
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:none;gap:8px;padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:rgba(245,246,242,.97);border-top:1px solid var(--line);backdrop-filter:blur(8px)}
+.dock a{flex:1;display:grid;justify-items:center;gap:2px;padding:8px 4px;min-height:52px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none;color:var(--pine);background:#fff;border:1px solid var(--line)}
+.dock a.main{flex:1.4;background:var(--pine);color:#fff;border-color:var(--pine)}
+.dock svg{width:20px;height:20px}
+@media (max-width:760px){.dock{display:flex}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<div style="background:#1D2130;color:#fff;font-size:13px;line-height:1.6;padding:8px max(16px,env(safe-area-inset-left,0px));text-align:center">これは「整体院向け LPテンプレート」の見本です。店名・住所・料金はすべて架空です。 <a href="https://se30-note.booth.pm/" style="color:#F2DDA4">BOOTHで見る</a></div>
+
+<header>
+  <div class="in bar">
+    <a class="logo" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#24564B"/><path d="M8 19c3-6 13-6 16 0" stroke="#F2C76E" stroke-width="3" fill="none" stroke-linecap="round"/></svg><span data-shop="name">ひだまり整体院</span></a>
+    <nav aria-label="ページ内メニュー">
+      <ul>
+        <li><a href="#flow">初めての方へ</a></li>
+        <li><a href="#price">料金</a></li>
+        <li><a href="#owner">院長紹介</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+        <li><a href="#access">アクセス</a></li>
+      </ul>
+    </nav>
+    <div class="bar-right">
+      <a class="bar-tel" data-link="tel" data-shop="tel" href="#">03-0000-0000</a>
+      <a class="btn" data-link="reserve" href="#">ネットで予約</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="in">
+    <!-- ✏️ 見出しと説明文 -->
+    <div class="hero-text">
+      <h1><span class="nb">からだの「つらい」を、</span><span class="nb">原因から見直す</span><span class="nb">整体院。</span></h1>
+      <p>肩や腰のつらさは、毎日の姿勢や体の使い方とつながっていることがあります。最初にお話と姿勢の確認に時間をかけ、施術とご自宅でできるケアを一緒に考えます。</p>
+      <div class="btns">
+        <a class="btn" data-link="reserve" href="#">初回を予約する</a>
+        <a class="btn ghost" data-link="line" href="#">LINEで相談する</a>
+      </div>
+      <ul class="facts">
+        <li>完全予約制</li><li>1日8名まで</li><li data-shop="access">〇〇駅 北口から徒歩5分</li>
+      </ul>
+    </div>
+
+    <!-- ✏️ 体の図：ボタンの名前と、下の「ZONES」の文章を書きかえます -->
+    <div class="finder">
+      <h2 id="finder-title">どこがつらいですか？</h2>
+      <svg class="body-map" viewBox="0 0 160 320" aria-hidden="true">
+        <circle class="base" cx="80" cy="30" r="22"/>
+        <rect class="base" x="72" y="48" width="16" height="16" rx="4"/>
+        <rect class="base" x="16" y="74" width="18" height="122" rx="9"/>
+        <rect class="base" x="126" y="74" width="18" height="122" rx="9"/>
+        <path class="zone" data-zone="shoulder" d="M38 72Q80 56 122 72L123 98H37Z"/>
+        <path class="zone" data-zone="back" d="M37 101H123L124 150H36Z"/>
+        <path class="zone" data-zone="waist" d="M36 153H124L126 198Q80 208 34 198Z"/>
+        <rect class="zone" data-zone="leg" x="42" y="210" width="34" height="106" rx="15"/>
+        <rect class="zone" data-zone="leg" x="84" y="210" width="34" height="106" rx="15"/>
+      </svg>
+      <div>
+        <div class="picks" role="group" aria-labelledby="finder-title">
+          <button type="button" data-pick="shoulder" aria-pressed="true">首・肩</button>
+          <button type="button" data-pick="back" aria-pressed="false">背中</button>
+          <button type="button" data-pick="waist" aria-pressed="false">腰</button>
+          <button type="button" data-pick="leg" aria-pressed="false">ひざ・脚</button>
+        </div>
+        <div class="answer" aria-live="polite">
+          <h3 data-a="title">首・肩がつらい方</h3>
+          <ul data-a="list"><li>夕方になると肩が重くなる</li><li>首を回すと張りを感じる</li></ul>
+          <p data-a="text">座り方と肩甲骨まわりの動きを確認し、こわばった筋肉をゆるめる施術を行います。</p>
+          <p class="course" data-a="course">おすすめ：整体コース 60分</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="in">
+    <!-- 整体院は医療機関ではありません。この一文は残すことをおすすめします -->
+    <p class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></svg>当院は医療機関ではありません。強い痛み・しびれ・けがの直後などは、まず医療機関を受診してください。</p>
+  </div>
+</section>
+
+<!-- ✏️ 初回の流れ（順番があるので番号つき） -->
+<section class="flow" id="flow" aria-labelledby="flow-title">
+  <div class="in">
+    <div class="head">
+      <h2 id="flow-title">初めての方へ</h2>
+      <p class="lead">初回は説明の時間をふくめて約90分です。動きやすい服装でお越しください（着替えもご用意しています）。</p>
+    </div>
+    <ol class="steps">
+      <li><p class="time">約15分</p><h3>お話をうかがう</h3><p>いつから、どんな時につらいのか、お仕事や生活のことをお聞きします。</p></li>
+      <li><p class="time">約15分</p><h3>姿勢と動きの確認</h3><p>立ち方や体の動かし方を一緒に見て、気になる点をお伝えします。</p></li>
+      <li><p class="time">約45分</p><h3>施術</h3><p>強さは途中で何度も確認します。ボキボキ鳴らす施術は行いません。</p></li>
+      <li><p class="time">約15分</p><h3>ご自宅でのケア</h3><p>次回までに続けやすいストレッチや、座り方の工夫をお伝えします。</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ✏️ 料金：価格は税込の総額で書きます -->
+<section id="price" aria-labelledby="price-title">
+  <div class="in">
+    <div class="head">
+      <h2 id="price-title">料金</h2>
+      <p class="lead">表示はすべて税込です。施術の前に、その日の内容と料金をお伝えしてから始めます。</p>
+    </div>
+    <div class="table-box">
+      <table class="price-table">
+        <thead><tr><th scope="col">コース</th><th scope="col">時間</th><th scope="col">料金</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">初回 整体コース<small>お話・姿勢の確認・施術・ケアの説明</small></th><td>約90分</td><td class="yen">6,600円</td></tr>
+          <tr><th scope="row">整体コース<small>2回目以降</small></th><td>60分</td><td class="yen">6,600円</td></tr>
+          <tr><th scope="row">ショートコース<small>首・肩など、気になる場所だけ</small></th><td>30分</td><td class="yen">3,850円</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="price-note">※ 整体の施術には健康保険は使えません。※ 上の料金は記入例です。院の実際の料金に書きかえてください。</p>
+  </div>
+</section>
+
+<!-- ✏️ 院長紹介：写真は images/owner.svg を差しかえ -->
+<section id="owner" aria-labelledby="owner-title" style="padding-top:0">
+  <div class="in owner">
+    <img src="images/owner.svg" alt="院長 田中の写真" width="480" height="600" loading="lazy">
+    <div class="owner-text">
+      <h2 id="owner-title">院長紹介</h2>
+      <p class="role">院長（整体の仕事について12年）</p>
+      <p class="name">田中 一郎</p>
+      <p>私自身、デスクワークで長く腰のつらさに悩んだことがあり、この仕事を始めました。「どうしてつらくなるのか」を分かりやすくお伝えし、通院の回数よりも、ご自身で体を整えられるようになることを大切にしています。</p>
+      <ul class="career">
+        <li>〇〇整体スクール 卒業（2014年）</li>
+        <li>〇〇の整体院で8年勤務</li>
+        <li>2022年 ひだまり整体院を開院</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ✏️ よくある質問 -->
+<section class="faq-band" id="faq" aria-labelledby="faq-title">
+  <div class="in">
+    <div class="head"><h2 id="faq-title">よくある質問</h2></div>
+    <div class="faq">
+      <details><summary>施術は痛くないですか？</summary><p>強さは途中で何度も確認します。痛いと感じたら、すぐにお伝えください。</p></details>
+      <details><summary>健康保険は使えますか？</summary><p>整体の施術は、健康保険の対象外です。料金は全額自費となります。</p></details>
+      <details><summary>どんな服装で行けばよいですか？</summary><p>動きやすい服装がおすすめです。着替えもご用意していますので、仕事帰りでもそのままお越しください。</p></details>
+      <details><summary>どのくらいの間隔で通えばよいですか？</summary><p>体の状態やご予定によって違います。初回にご説明しますが、通う回数を無理にすすめることはありません。</p></details>
+      <details><summary>キャンセルはいつまでにすればよいですか？</summary><p>前日の受付時間内までにご連絡ください。</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="access" id="access" aria-labelledby="access-title">
+  <div class="in">
+    <div>
+      <div class="head"><h2 id="access-title">アクセス・受付時間</h2></div>
+      <dl class="info">
+        <dt>住所</dt><dd>〒<span data-shop="zip">000-0000</span><br><span data-shop="address">東京都〇〇区〇〇町4-5-6</span></dd>
+        <dt>アクセス</dt><dd data-shop="access">〇〇駅 北口から徒歩5分</dd>
+        <dt>受付時間</dt><dd><div class="hours" data-hours></div></dd>
+        <dt>駐車場</dt><dd data-shop="parking">院の前に2台</dd>
+        <dt>お支払い</dt><dd data-shop="payment">現金・クレジットカード</dd>
+        <dt>電話</dt><dd><a data-link="tel" data-shop="tel" href="#">03-0000-0000</a></dd>
+      </dl>
+    </div>
+    <div class="map" data-map></div>
+  </div>
+</section>
+
+<section class="last" aria-labelledby="last-title">
+  <div class="in">
+    <h2 id="last-title">ご予約・ご相談</h2>
+    <p>ネット予約は24時間受け付けています。施術中は電話に出られないことがあります。</p>
+    <div class="btns" style="justify-content:center">
+      <a class="btn" data-link="reserve" href="#">初回を予約する</a>
+      <a class="btn ghost" data-link="line" href="#">LINEで相談する</a>
+    </div>
+    <a class="tel-big" data-link="tel" data-shop="tel" href="#">03-0000-0000</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="in"><span>© <span data-year></span> <span data-shop="name">ひだまり整体院</span></span></div>
+</footer>
+
+<div class="dock" aria-label="予約・お問い合わせ">
+  <a data-link="tel" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>電話</a>
+  <a class="main" data-link="reserve" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>ネット予約</a>
+  <a data-link="line" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 11.5c0 4.1-4 7.5-9 7.5-1 0-2-.1-2.9-.4L4 20l1.4-3.6C4 15 3 13.4 3 11.5 3 7.4 7 4 12 4s9 3.4 9 7.5z"/></svg>LINE</a>
+</div>
+
+<!-- ✏️ 体の図で表示する文章（「治る」「改善を保証」などの言い方は使わないでください） -->
+<script>
+window.ZONES = {
+  shoulder: { title:"首・肩がつらい方", list:["夕方になると肩が重くなる","首を回すと張りを感じる"],
+    text:"座り方と肩甲骨まわりの動きを確認し、こわばった筋肉をゆるめる施術を行います。", course:"おすすめ：整体コース 60分" },
+  back: { title:"背中がつらい方", list:["朝起きると背中がこわばっている","深呼吸がしにくい感じがする"],
+    text:"背骨と肋骨まわりの動きを確認し、呼吸がしやすい姿勢を一緒に探します。", course:"おすすめ：整体コース 60分" },
+  waist: { title:"腰がつらい方", list:["長く座っていると腰が重い","立ち上がる時に腰をかばってしまう"],
+    text:"骨盤と股関節の動きを確認し、腰に負担がかかりにくい体の使い方をお伝えします。", course:"おすすめ：整体コース 60分" },
+  leg: { title:"ひざ・脚がつらい方", list:["階段でひざまわりが気になる","夕方になると脚が重くなる"],
+    text:"歩き方と足首・股関節の動きを確認し、脚全体のバランスを整える施術を行います。", course:"おすすめ：整体コース 60分" }
+};
+</script>
+
+<!-- ここから下は、さわらなくて大丈夫です -->
+<script>
+(function(){
+  var S = window.SHOP || {}, Z = window.ZONES || {};
+  document.querySelectorAll("[data-shop]").forEach(function(el){ var v = S[el.getAttribute("data-shop")]; if (v) el.textContent = v; });
+  document.querySelectorAll("[data-link]").forEach(function(el){
+    var k = el.getAttribute("data-link");
+    var v = k === "tel" ? (S.tel ? "tel:" + S.tel.replace(/[^0-9+]/g, "") : "") : S[k];
+    if (v) { el.href = v; if (/^https?:/.test(v)) { el.target = "_blank"; el.rel = "noopener"; } } else { el.hidden = true; }
+  });
+  var h = document.querySelector("[data-hours]");
+  if (h && S.hours) h.innerHTML = S.hours.map(function(r){ return "<span><b>" + r[0] + "</b>　" + r[1] + "</span>"; }).join("");
+  var m = document.querySelector("[data-map]");
+  if (m && S.address) { var f = document.createElement("iframe"); f.title = "地図：" + S.address; f.loading = "lazy";
+    f.src = "https://maps.google.com/maps?q=" + encodeURIComponent(S.address) + "&z=16&output=embed"; m.appendChild(f); }
+  document.querySelectorAll("[data-year]").forEach(function(el){ el.textContent = new Date().getFullYear(); });
+
+  /* 体の図 */
+  function pick(key){
+    var z = Z[key]; if (!z) return;
+    document.querySelectorAll("[data-pick]").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-pick") === key ? "true" : "false"); });
+    document.querySelectorAll(".zone").forEach(function(p){ p.classList.toggle("on", p.getAttribute("data-zone") === key); });
+    document.querySelector('[data-a="title"]').textContent = z.title;
+    document.querySelector('[data-a="list"]').innerHTML = z.list.map(function(t){ return "<li>" + t + "</li>"; }).join("");
+    document.querySelector('[data-a="text"]').textContent = z.text;
+    document.querySelector('[data-a="course"]').textContent = z.course;
+  }
+  document.querySelectorAll("[data-pick]").forEach(function(b){ b.addEventListener("click", function(){ pick(b.getAttribute("data-pick")); }); });
+  document.querySelectorAll(".zone").forEach(function(p){ p.addEventListener("click", function(){ pick(p.getAttribute("data-zone")); }); });
+  pick("shoulder");
+
+  var ld = { "@context":"https://schema.org", "@type":"HealthAndBeautyBusiness", "name":S.name, "alternateName":S.nameKana,
+    "description":S.catch, "telephone":S.tel, "url":location.href.split("#")[0],
+    "address":{ "@type":"PostalAddress", "postalCode":S.zip, "streetAddress":S.address, "addressCountry":"JP" } };
+  var s = document.createElement("script"); s.type = "application/ld+json"; s.textContent = JSON.stringify(ld); document.head.appendChild(s);
+})();
+</script>
+</body>
+</html>
